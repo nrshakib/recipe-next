@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
-const RecipeForm = (props) => {
+const RecipeForm = ({ addRecipe }) => {
   const [allIngredients, setAllIngredients] = useState([]);
   const [recipeTitle, setRecipeTitle] = useState("");
   const [selectedIngredients, setSelectedIngredients] = useState([]);
@@ -49,6 +50,14 @@ const RecipeForm = (props) => {
     if (!instructions.trim()) {
       newErrors.instructions = "Instructions are required";
     }
+
+    const newRecipe = {
+      id: uuidv4(),
+      recipeTitle: recipeTitle,
+      selectedIngredients: selectedIngredients,
+      instructions: instructions,
+    };
+    addRecipe(newRecipe);
 
     setErrors(newErrors);
     setRecipeTitle("");
