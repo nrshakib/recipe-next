@@ -6,7 +6,7 @@ const RecipeForm = (props) => {
   const [recipeTitle, setRecipeTitle] = useState("");
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [instructions, setInstructions] = useState("");
-  const [mediaUrl, setMediaUrl] = useState("");
+  // const [mediaUrl, setMediaUrl] = useState("");
   const [errors, setErrors] = useState({});
 
   // Fetch Instruction Data
@@ -32,9 +32,9 @@ const RecipeForm = (props) => {
     setInstructions(e.target.value);
   };
 
-  const handleMediaUrlChange = (e) => {
-    setMediaUrl(e.target.value);
-  };
+  //  const handleMediaUrlChange = (e) => {
+  //  setMediaUrl(e.target.value);
+  // };
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -51,13 +51,16 @@ const RecipeForm = (props) => {
     }
 
     setErrors(newErrors);
+    setRecipeTitle("");
+    setSelectedIngredients([]);
+    setInstructions("");
 
     if (Object.keys(newErrors).length === 0) {
       // Form is valid, handle the submission (e.g., save to a database)
       console.log("Recipe Title:", recipeTitle);
       console.log("Selected Ingredients:", selectedIngredients);
       console.log("Instructions:", instructions);
-      console.log("Media URL:", mediaUrl);
+      // console.log("Media URL:", mediaUrl);
     }
   };
   return (
@@ -83,7 +86,10 @@ const RecipeForm = (props) => {
             onChange={handleIngredientChange}
           >
             {allIngredients.map((ingredient) => (
-              <option className="border border-black h-8 text-center pt-1" key={ingredient.id}>
+              <option
+                className="border border-black h-8 text-center pt-1"
+                key={ingredient.id}
+              >
                 {ingredient.label}
               </option>
             ))}
@@ -110,7 +116,12 @@ const RecipeForm = (props) => {
           <input type="text" value={mediaUrl} onChange={handleMediaUrlChange} />
         </label> */}
         <br />
-        <button className="w-64 h-8 bg-yellow-500 rounded-md text-black" type="submit">Submit</button>
+        <button
+          className="w-64 h-8 bg-yellow-500 rounded-md text-black"
+          type="submit"
+        >
+          Submit
+        </button>
       </form>
     </div>
   );
